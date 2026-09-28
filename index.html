@@ -1,4 +1,428 @@
-```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For Shruti ✨</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+*{box-sizing:border-box}
+html,body{margin:0;width:100%;height:100%;overflow:hidden}
+body{
+  background:#07070d;
+  color:#fff;
+  font-family:Inter,sans-serif;
+}
+canvas{position:fixed;inset:0;width:100%;height:100%}
+
+/* ---------- MAIN SCENE ---------- */
+.scene{
+  position:relative;z-index:2;width:100%;height:100%;
+  display:grid;place-items:center;padding:18px;
+}
+.card{
+  width:min(680px,94vw);
+  max-height:calc(100vh - 36px);
+  padding:38px 34px 28px;
+  text-align:center;border-radius:30px;
+  background:linear-gradient(145deg,rgba(255,255,255,.13),rgba(255,255,255,.035));
+  border:1px solid rgba(255,255,255,.18);
+  backdrop-filter:blur(20px);
+  box-shadow:0 35px 100px rgba(0,0,0,.55);
+  transition:transform .25s ease, opacity .8s ease, filter .8s ease;
+}
+.badge{
+  display:inline-block;padding:8px 16px;border-radius:50px;
+  border:1px solid rgba(255,190,225,.25);
+  background:rgba(255,150,210,.08);color:#f8c9e4;
+  font-size:11px;letter-spacing:2.2px;text-transform:uppercase;
+}
+.cake{
+  font-size:68px;margin-top:14px;
+  filter:drop-shadow(0 15px 25px rgba(255,120,190,.25));
+  animation:floating 2.5s ease-in-out infinite;
+}
+@keyframes floating{50%{transform:translateY(-8px) rotate(2deg)}}
+h1{
+  margin:10px 0 8px;font-family:'Cormorant Garamond',Georgia,serif;
+  font-weight:600;font-size:clamp(54px,10vw,86px);line-height:.86;
+  letter-spacing:-2px;
+  background:linear-gradient(100deg,#fff,#ffd6eb,#d9ccff,#fff);
+  background-size:250%;-webkit-background-clip:text;color:transparent;
+  animation:gradientMove 5s linear infinite;
+}
+@keyframes gradientMove{to{background-position:250%}}
+.subtitle{margin:18px auto 24px;max-width:520px;color:#d9d4e3;font-size:15px;line-height:1.7}
+button{
+  border:0;padding:14px 24px;border-radius:50px;font-family:Inter,sans-serif;
+  font-size:14px;font-weight:600;color:#211020;
+  background:linear-gradient(135deg,#ffd2e9,#d8ceff);cursor:pointer;
+  box-shadow:0 12px 35px rgba(210,150,255,.22);
+  transition:transform .2s ease,box-shadow .2s ease;
+}
+button:hover{transform:translateY(-3px);box-shadow:0 16px 40px rgba(230,170,255,.32)}
+.code{margin-top:20px;font:11px ui-monospace,SFMono-Regular,Menlo,monospace;color:#858091;opacity:.7}
+
+/* ---------- REVEAL OVERLAY ---------- */
+.reveal{
+  position:fixed;inset:0;z-index:20;display:grid;place-items:center;
+  pointer-events:none;opacity:0;
+  background:rgba(3,3,9,.15);
+  transition:opacity .35s ease;
+}
+.reveal.active{opacity:1;pointer-events:auto}
+
+/* Shooting-star layer */
+#shootingStars{position:absolute;inset:0;width:100%;height:100%;z-index:0}
+
+/* Letter */
+.letter-wrap{
+  position:relative;z-index:2;width:min(650px,92vw);height:min(720px,88vh);
+  perspective:1600px;
+  transform:translateY(30px) scale(.82) rotateX(8deg);
+  opacity:0;
+  transition:transform 1.15s cubic-bezier(.2,.8,.2,1),opacity .6s ease;
+}
+.reveal.active .letter-wrap{
+  transform:translateY(0) scale(1) rotateX(0);
+  opacity:1;
+}
+.envelope{
+  position:absolute;inset:0;border-radius:24px;
+  background:linear-gradient(145deg,#f7ddeb,#dfd0f5);
+  box-shadow:0 35px 100px rgba(0,0,0,.65),0 0 80px rgba(245,170,220,.13);
+  overflow:hidden;
+}
+.envelope:before{
+  content:"";position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(255,255,255,.35),transparent 45%,rgba(120,80,130,.08));
+}
+.flap{
+  position:absolute;z-index:5;top:0;left:0;width:100%;height:52%;
+  clip-path:polygon(0 0,100% 0,50% 100%);
+  background:linear-gradient(145deg,#fceaf4,#d8c8ee);
+  transform-origin:50% 0;
+  transform:rotateX(0deg);
+  transition:transform 1.15s cubic-bezier(.65,.05,.35,1);
+  box-shadow:0 8px 20px rgba(70,35,75,.18);
+}
+.reveal.open .flap{transform:rotateX(180deg)}
+.seal{
+  position:absolute;z-index:7;top:39%;left:50%;transform:translate(-50%,-50%);
+  width:66px;height:66px;border-radius:50%;display:grid;place-items:center;
+  background:radial-gradient(circle at 35% 30%,#ffb9d9,#d85c9d);
+  box-shadow:0 8px 25px rgba(120,30,90,.3);
+  font-size:25px;transition:opacity .45s ease,transform .6s ease;
+}
+.reveal.open .seal{opacity:0;transform:translate(-50%,-50%) scale(.5)}
+
+.letter{
+  position:absolute;z-index:3;inset:28px;border-radius:18px;
+  background:linear-gradient(160deg,#fffafd,#f7edf8);
+  color:#302335;padding:52px 42px 34px;
+  overflow:auto;box-shadow:0 20px 55px rgba(50,20,50,.2);
+  transform:translateY(60px);opacity:0;
+  transition:transform 1s .55s cubic-bezier(.2,.8,.2,1),opacity .7s .55s ease;
+}
+.reveal.open .letter{transform:translateY(0);opacity:1}
+.letter h2{
+  margin:0 0 8px;text-align:center;
+  font-family:'Cormorant Garamond',Georgia,serif;
+  font-size:clamp(38px,8vw,62px);font-weight:600;
+  color:#7e3c69;
+}
+.letter .small{
+  text-align:center;color:#9c7592;font-size:11px;letter-spacing:2.5px;text-transform:uppercase;
+  margin-bottom:28px;
+}
+.letter p{font-family:'Cormorant Garamond',Georgia,serif;font-size:21px;line-height:1.55;margin:15px 0}
+.letter .signature{margin-top:24px;text-align:right;font-family:'Cormorant Garamond',Georgia,serif;font-size:25px;color:#a3477e}
+.close{
+  position:absolute;z-index:10;right:18px;top:15px;
+  width:34px;height:34px;padding:0;border-radius:50%;
+  background:rgba(255,255,255,.65);color:#613552;
+  box-shadow:none;font-size:17px;
+}
+.close:hover{transform:none}
+
+/* particles */
+.particle{position:fixed;z-index:30;pointer-events:none;font-size:18px;animation:rise 3.5s linear forwards}
+@keyframes rise{
+  from{transform:translateY(0) scale(.7) rotate(0);opacity:1}
+  to{transform:translateY(-100vh) scale(1.5) rotate(30deg);opacity:0}
+}
+
+/* ---------- RESPONSIVE ---------- */
+@media(max-width:520px){
+  .card{padding:30px 20px 22px}
+  .cake{font-size:56px}
+  .letter{inset:15px;padding:42px 25px 25px}
+  .letter p{font-size:19px}
+  .letter-wrap{height:86vh}
+}
+</style>
+</head>
+
+<body>
+
+<canvas id="stars"></canvas>
+
+<div class="scene" id="mainScene">
+  <main class="card" id="card">
+    <div class="badge">Made by me. Especially for you. ♡</div>
+    <div class="cake">🎂</div>
+
+    <h1>Happy Birthday,<br>Shruti</h1>
+
+    <p class="subtitle">
+      There are probably a hundred ways to wish someone a happy birthday...
+      <br>
+      but honestly, you're a little too special for something that ordinary. ✨
+    </p>
+
+    <button id="openBtn">Okay, this part is just for you →</button>
+
+    <div class="code">&lt;coded specially for Shruti · v1.0.0 /&gt;</div>
+  </main>
+</div>
+
+<!-- Full-screen cinematic reveal -->
+<section class="reveal" id="reveal">
+
+  <canvas id="shootingStars"></canvas>
+
+  <div class="letter-wrap">
+
+    <div class="envelope">
+
+      <div class="flap"></div>
+
+      <div class="seal">♡</div>
+
+      <article class="letter">
+
+        <button class="close" id="closeBtn">×</button>
+
+        <h2>For You, Shruti</h2>
+        <div class="small">a little birthday confession</div>
+
+        <p>
+          I could've sent you a simple “Happy Birthday”...
+          but honestly, you're a little too special for something that ordinary. ❤️
+        </p>
+
+        <p>
+          So here's a tiny corner of the internet that I made just for you.
+        </p>
+
+        <p>
+          I hope this year gives you everything you're wishing for,
+          a thousand reasons to smile,
+          and maybe... one very persistent person who keeps finding
+          excuses to make you smile. 😉
+        </p>
+
+        <p>
+          And since it's your birthday, I'll make one selfish wish too—
+        </p>
+
+        <p>
+          I hope I get to be a little more than just the guy
+          who wishes you on your birthday. ❤️
+        </p>
+
+        <p>
+          Until then...
+        </p>
+
+        <p>
+          Today is your day —
+          but I'm secretly glad I get to make a little part of it mine. ✨
+        </p>
+
+        <div class="signature">
+          Happy Birthday, Shruti. 🌷<br>
+          <span style="font-size:21px">— Someone who's quite fond of you ♡</span>
+        </div>
+
+      </article>
+    </div>
+
+  </div>
+</section>
+
+<script>
+/* ---------- NORMAL STARFIELD ---------- */
+const bg=document.getElementById("stars");
+const bctx=bg.getContext("2d");
+let W,H,stars=[];
+
+function resizeBG(){
+  W=bg.width=innerWidth*devicePixelRatio;
+  H=bg.height=innerHeight*devicePixelRatio;
+  bctx.setTransform(devicePixelRatio,0,0,devicePixelRatio,0,0);
+  W/=devicePixelRatio; H/=devicePixelRatio;
+  stars=Array.from({length:150},()=>({
+    x:Math.random()*W,y:Math.random()*H,
+    r:Math.random()*1.4+.2,s:Math.random()*.35+.05
+  }));
+}
+resizeBG();
+addEventListener("resize",resizeBG);
+
+function drawBG(){
+  bctx.clearRect(0,0,W,H);
+  stars.forEach(s=>{
+    s.y+=s.s;if(s.y>H)s.y=0;
+    bctx.globalAlpha=.2+Math.random()*.6;
+    bctx.fillStyle="#fff";
+    bctx.beginPath();bctx.arc(s.x,s.y,s.r,0,Math.PI*2);bctx.fill();
+  });
+  requestAnimationFrame(drawBG);
+}
+drawBG();
+
+/* ---------- 3D CARD ---------- */
+const card=document.getElementById("card");
+document.addEventListener("pointermove",e=>{
+  if(document.getElementById("reveal").classList.contains("active")) return;
+  const r=card.getBoundingClientRect();
+  const x=(e.clientX-r.left)/r.width-.5;
+  const y=(e.clientY-r.top)/r.height-.5;
+  card.style.transform=`perspective(1000px) rotateY(${x*7}deg) rotateX(${-y*7}deg) translateY(-5px)`;
+});
+document.addEventListener("pointerleave",()=>card.style.transform="");
+
+/* ---------- SHOOTING STARS ---------- */
+const sc=document.getElementById("shootingStars");
+const sctx=sc.getContext("2d");
+let sw,sh,meteors=[],meteorAnimation;
+
+function resizeShooting(){
+  sw=sc.width=innerWidth*devicePixelRatio;
+  sh=sc.height=innerHeight*devicePixelRatio;
+  sctx.setTransform(devicePixelRatio,0,0,devicePixelRatio,0,0);
+  sw/=devicePixelRatio; sh/=devicePixelRatio;
+}
+
+function spawnMeteor(delay=0){
+  setTimeout(()=>{
+    meteors.push({
+      x:Math.random()*sw*.95,
+      y:Math.random()*sh*.45,
+      len:80+Math.random()*130,
+      speed:8+Math.random()*8,
+      life:0,
+      max:55+Math.random()*35
+    });
+  },delay);
+}
+
+function drawMeteors(){
+  sctx.clearRect(0,0,sw,sh);
+
+  meteors.forEach(m=>{
+    m.x+=m.speed;
+    m.y+=m.speed*.58;
+    m.life++;
+
+    const grad=sctx.createLinearGradient(
+      m.x-m.len,m.y-m.len*.58,m.x,m.y
+    );
+    grad.addColorStop(0,"rgba(255,190,230,0)");
+    grad.addColorStop(.65,"rgba(255,220,245,.25)");
+    grad.addColorStop(1,"rgba(255,255,255,.95)");
+
+    sctx.strokeStyle=grad;
+    sctx.lineWidth=2.2;
+    sctx.beginPath();
+    sctx.moveTo(m.x-m.len,m.y-m.len*.58);
+    sctx.lineTo(m.x,m.y);
+    sctx.stroke();
+
+    sctx.fillStyle="#fff";
+    sctx.beginPath();
+    sctx.arc(m.x,m.y,2.5,0,Math.PI*2);
+    sctx.fill();
+  });
+
+  meteors=meteors.filter(m=>m.life<m.max && m.x<sw+200 && m.y<sh+200);
+  meteorAnimation=requestAnimationFrame(drawMeteors);
+}
+
+resizeShooting();
+addEventListener("resize",resizeShooting);
+
+/* ---------- PARTICLES ---------- */
+function burst(){
+  const emojis=["✨","💖","🌸","💫","♡"];
+  for(let i=0;i<32;i++){
+    setTimeout(()=>{
+      const p=document.createElement("div");
+      p.className="particle";
+      p.textContent=emojis[Math.floor(Math.random()*emojis.length)];
+      p.style.left=Math.random()*100+"vw";
+      p.style.bottom=(5+Math.random()*15)+"vh";
+      p.style.animationDuration=(2.5+Math.random()*2)+"s";
+      document.body.appendChild(p);
+      setTimeout(()=>p.remove(),4500);
+    },i*55);
+  }
+}
+
+/* ---------- CINEMATIC PAGE TURN ---------- */
+const reveal=document.getElementById("reveal");
+const mainScene=document.getElementById("mainScene");
+
+document.getElementById("openBtn").addEventListener("click",()=>{
+  mainScene.style.transition="opacity .75s ease, transform .9s ease, filter .9s ease";
+  mainScene.style.opacity=".12";
+  mainScene.style.transform="scale(.92) translateY(-20px)";
+  mainScene.style.filter="blur(8px)";
+
+  reveal.classList.add("active");
+
+  cancelAnimationFrame(meteorAnimation);
+  meteors=[];
+  drawMeteors();
+
+  /* Staggered shooting stars — they begin as the card opens */
+  for(let i=0;i<15;i++) spawnMeteor(i*180);
+
+  setTimeout(()=>{
+    reveal.classList.add("open");
+    burst();
+  },350);
+});
+
+document.getElementById("closeBtn").addEventListener("click",()=>{
+  reveal.classList.remove("open");
+
+  setTimeout(()=>{
+    reveal.classList.remove("active");
+    mainScene.style.opacity="1";
+    mainScene.style.transform="";
+    mainScene.style.filter="";
+    cancelAnimationFrame(meteorAnimation);
+    meteors=[];
+  },900);
+});
+</script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+<!-- ```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -661,4 +1085,4 @@ document
 
 </body>
 </html>
-```
+``` -->
