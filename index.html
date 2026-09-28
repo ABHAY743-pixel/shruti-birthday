@@ -1,255 +1,330 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>For Shruti ✨</title>
 
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
 <style>
+
 *{
-  box-sizing:border-box;
+    box-sizing:border-box;
 }
 
 html,body{
-  margin:0;
-  width:100%;
-  height:100%;
-  overflow:hidden;
+    margin:0;
+    width:100%;
+    height:100%;
+    overflow:hidden;
 }
 
 body{
-  font-family:Inter,system-ui,-apple-system,Segoe UI,sans-serif;
-  background:#080714;
-  color:white;
+    background:
+        radial-gradient(circle at 20% 20%, #29203b 0%, transparent 35%),
+        radial-gradient(circle at 80% 80%, #24152f 0%, transparent 40%),
+        #08070d;
+
+    color:#fff;
+    font-family:'Inter',sans-serif;
 }
 
 canvas{
-  position:fixed;
-  inset:0;
-  width:100%;
-  height:100%;
+    position:fixed;
+    inset:0;
+    width:100%;
+    height:100%;
 }
 
 .scene{
-  position:relative;
-  z-index:2;
-  width:100%;
-  height:100%;
-  display:grid;
-  place-items:center;
-  padding:24px;
+    position:relative;
+    z-index:2;
+
+    width:100%;
+    height:100%;
+
+    display:grid;
+    place-items:center;
+
+    padding:20px;
 }
 
 .card{
-  width:min(680px,94vw);
-  padding:42px 34px 34px;
+    width:min(680px,94vw);
 
-  border:1px solid rgba(255,255,255,.18);
+    padding:48px 38px 34px;
 
-  background:
-    linear-gradient(
-      145deg,
-      rgba(255,255,255,.13),
-      rgba(255,255,255,.045)
-    );
+    text-align:center;
 
-  backdrop-filter:blur(18px);
+    border-radius:30px;
 
-  border-radius:28px;
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,.13),
+            rgba(255,255,255,.035)
+        );
 
-  box-shadow:
-    0 30px 100px rgba(0,0,0,.5);
+    border:1px solid rgba(255,255,255,.18);
 
-  text-align:center;
+    backdrop-filter:blur(20px);
 
-  transform-style:preserve-3d;
+    box-shadow:
+        0 35px 100px rgba(0,0,0,.55);
 
-  animation:float 5s ease-in-out infinite;
-}
+    transform-style:preserve-3d;
 
-@keyframes float{
-  50%{
-    transform:translateY(-9px) rotateX(1deg);
-  }
+    transition:transform .25s ease;
 }
 
 .badge{
-  display:inline-block;
+    display:inline-block;
 
-  padding:7px 14px;
+    padding:8px 16px;
 
-  border-radius:99px;
+    border-radius:50px;
 
-  background:rgba(255,105,180,.13);
+    border:1px solid rgba(255,190,225,.25);
 
-  border:1px solid rgba(255,150,210,.25);
+    background:rgba(255,150,210,.08);
 
-  font-size:12px;
+    color:#f8c9e4;
 
-  letter-spacing:2px;
+    font-size:11px;
 
-  text-transform:uppercase;
+    letter-spacing:2px;
 
-  color:#ffc6e7;
-}
-
-h1{
-  font-size:clamp(46px,10vw,86px);
-
-  line-height:.95;
-
-  margin:22px 0 10px;
-
-  background:
-    linear-gradient(
-      90deg,
-      #fff,
-      #ffb6df,
-      #c9b8ff,
-      #fff
-    );
-
-  background-size:250%;
-
-  -webkit-background-clip:text;
-
-  color:transparent;
-
-  animation:shine 4s linear infinite;
-}
-
-@keyframes shine{
-  to{
-    background-position:250%;
-  }
-}
-
-.subtitle{
-  font-size:17px;
-
-  color:#d9d6e8;
-
-  margin:0 auto 25px;
-
-  max-width:520px;
-
-  line-height:1.6;
+    text-transform:uppercase;
 }
 
 .cake{
-  font-size:76px;
+    font-size:72px;
 
-  filter:
-    drop-shadow(
-      0 12px 22px rgba(255,120,190,.25)
-    );
+    margin-top:20px;
 
-  animation:bob 2.2s ease-in-out infinite;
+    filter:
+        drop-shadow(
+            0 15px 25px rgba(255,120,190,.25)
+        );
+
+    animation:
+        floating 2.5s ease-in-out infinite;
 }
 
-@keyframes bob{
-  50%{
-    transform:translateY(-8px) rotate(2deg);
-  }
+@keyframes floating{
+
+    50%{
+        transform:
+            translateY(-9px)
+            rotate(2deg);
+    }
+}
+
+h1{
+
+    margin:15px 0 8px;
+
+    font-family:
+        'Cormorant Garamond',
+        Georgia,
+        serif;
+
+    font-weight:600;
+
+    font-size:
+        clamp(55px,10vw,88px);
+
+    line-height:.88;
+
+    letter-spacing:-2px;
+
+    background:
+        linear-gradient(
+            100deg,
+            #fff,
+            #ffd6eb,
+            #d9ccff,
+            #fff
+        );
+
+    background-size:250%;
+
+    -webkit-background-clip:text;
+
+    color:transparent;
+
+    animation:
+        gradientMove 5s linear infinite;
+}
+
+@keyframes gradientMove{
+
+    to{
+        background-position:250%;
+    }
+}
+
+.subtitle{
+
+    margin:
+        22px auto 28px;
+
+    max-width:520px;
+
+    color:#d9d4e3;
+
+    font-size:16px;
+
+    line-height:1.75;
 }
 
 button{
-  border:0;
 
-  border-radius:999px;
+    border:0;
 
-  padding:14px 24px;
+    padding:
+        14px 25px;
 
-  font-size:15px;
+    border-radius:50px;
 
-  font-weight:700;
+    font-family:'Inter',sans-serif;
 
-  cursor:pointer;
+    font-size:14px;
 
-  color:#241027;
+    font-weight:600;
 
-  background:
-    linear-gradient(
-      135deg,
-      #ffd0ec,
-      #cfc3ff
-    );
+    color:#211020;
 
-  box-shadow:
-    0 10px 30px rgba(210,150,255,.22);
+    background:
+        linear-gradient(
+            135deg,
+            #ffd2e9,
+            #d8ceff
+        );
+
+    cursor:pointer;
+
+    box-shadow:
+        0 12px 35px
+        rgba(210,150,255,.22);
+
+    transition:
+        transform .2s ease,
+        box-shadow .2s ease;
+}
+
+button:hover{
+
+    transform:translateY(-3px);
+
+    box-shadow:
+        0 16px 40px
+        rgba(230,170,255,.32);
 }
 
 #secret{
-  max-height:0;
 
-  opacity:0;
+    max-height:0;
 
-  overflow:hidden;
+    opacity:0;
 
-  transition:.8s ease;
+    overflow:hidden;
 
-  margin-top:0;
+    margin-top:0;
 
-  color:#f4edf8;
+    transition:
+        max-height 1s ease,
+        opacity 1s ease,
+        margin-top 1s ease;
 
-  line-height:1.8;
+    color:#eee8f2;
+
+    line-height:1.8;
+
+    font-size:15px;
 }
 
 #secret.open{
-  max-height:250px;
 
-  opacity:1;
+    max-height:500px;
 
-  margin-top:24px;
+    opacity:1;
+
+    margin-top:28px;
+}
+
+.signature{
+
+    margin-top:20px;
+
+    font-family:
+        'Cormorant Garamond',
+        Georgia,
+        serif;
+
+    font-size:23px;
+
+    color:#ffd1e8;
 }
 
 .code{
-  margin-top:22px;
 
-  font:
-    12px
-    ui-monospace,
-    SFMono-Regular,
-    Menlo,
-    monospace;
+    margin-top:25px;
 
-  color:#a9a3b8;
+    font-family:
+        ui-monospace,
+        SFMono-Regular,
+        Menlo,
+        monospace;
 
-  opacity:.75;
+    font-size:11px;
+
+    color:#858091;
+
+    opacity:.7;
 }
 
 .heart{
-  position:fixed;
 
-  pointer-events:none;
+    position:fixed;
 
-  font-size:18px;
+    pointer-events:none;
 
-  animation:
-    rise 3s linear forwards;
+    font-size:18px;
+
+    animation:
+        rise 3.5s linear forwards;
 }
 
 @keyframes rise{
 
-  from{
-    transform:
-      translateY(0)
-      scale(.7)
-      rotate(0);
+    from{
 
-    opacity:1;
-  }
+        transform:
+            translateY(0)
+            scale(.7)
+            rotate(0);
 
-  to{
-    transform:
-      translateY(-100vh)
-      scale(1.5)
-      rotate(25deg);
+        opacity:1;
+    }
 
-    opacity:0;
-  }
+    to{
+
+        transform:
+            translateY(-100vh)
+            scale(1.5)
+            rotate(30deg);
+
+        opacity:0;
+    }
 }
+
 </style>
 </head>
 
@@ -262,7 +337,7 @@ button{
 <main class="card" id="card">
 
 <div class="badge">
-A tiny project, made with ☕ & code
+Made by me. Especially for you. ♡
 </div>
 
 <div class="cake">
@@ -271,51 +346,101 @@ A tiny project, made with ☕ & code
 
 <h1>
 Happy Birthday,<br>
-Shruti ✨
+Shruti
 </h1>
 
 <p class="subtitle">
 
-I could have just typed
-“Happy Birthday”...
+There are probably a hundred ways to wish someone
+a happy birthday...
 
 <br>
 
-but that felt a little too ordinary for you.
+but honestly, you're a little too special
+for something that ordinary. ✨
 
 </p>
 
 <button id="btn">
-Run birthday surprise ▶
+Okay, this part is just for you →
 </button>
 
 <div id="secret">
 
-<div style="font-size:22px">
-💫
-</div>
-
 <p>
 
-May your year be filled with the kind of
-moments that make you randomly smile,
-people who make ordinary days special,
-and dreams that somehow turn into reality.
+I could've sent you a simple
+“Happy Birthday”...
+
+but honestly, you're a little too special
+for something that ordinary. ❤️
 
 </p>
 
 <p>
-<b>
-Have an amazing birthday, Shruti. 🌷
-</b>
+
+So here's a tiny corner of the internet
+that I made just for you.
+
+</p>
+
+<p>
+
+I hope this year gives you everything you're wishing for,
+a thousand reasons to smile,
+and maybe...
+
+one very persistent person who keeps finding
+excuses to make you smile. 😉
+
+</p>
+
+<p>
+
+And since it's your birthday,
+I'll make one selfish wish too—
+
+</p>
+
+<p>
+
+I hope I get to be a little more than just the guy
+who wishes you on your birthday. ❤️
+
+</p>
+
+<p>
+
+Until then...
+
+</p>
+
+<div class="signature">
+
+Happy Birthday, Shruti. 🌷
+
+</div>
+
+<p>
+
+Today is your day —
+
+but I'm secretly glad I get to make
+a little part of it mine. ✨
+
+</p>
+
+<p style="font-family:'Cormorant Garamond',Georgia,serif;font-size:21px;color:#ffd1e8;">
+
+— Someone who's quite fond of you ♡
+
 </p>
 
 </div>
 
 <div class="code">
 
-// built specially for Shruti
-// version 1.0.0 🎀
+<!-- coded specially for Shruti · v1.0.0 -->
 
 </div>
 
@@ -326,9 +451,9 @@ Have an amazing birthday, Shruti. 🌷
 
 <script>
 
-/* =========================
+/* ==========================
    STARFIELD
-========================= */
+========================== */
 
 const canvas =
 document.getElementById("stars");
@@ -343,190 +468,197 @@ let stars=[];
 
 function resize(){
 
-  width =
-  canvas.width =
-  innerWidth * devicePixelRatio;
+    width =
+        canvas.width =
+        innerWidth * devicePixelRatio;
 
-  height =
-  canvas.height =
-  innerHeight * devicePixelRatio;
+    height =
+        canvas.height =
+        innerHeight * devicePixelRatio;
 
-  ctx.scale(
-    devicePixelRatio,
-    devicePixelRatio
-  );
+    ctx.setTransform(
+        devicePixelRatio,
+        0,
+        0,
+        devicePixelRatio,
+        0,
+        0
+    );
 
-  width/=devicePixelRatio;
-  height/=devicePixelRatio;
+    width/=devicePixelRatio;
+    height/=devicePixelRatio;
 
-  stars =
-  Array.from(
-    {length:130},
-    () => ({
-      x:Math.random()*width,
-      y:Math.random()*height,
-      r:Math.random()*1.5+.2,
-      s:Math.random()*.45+.08
-    })
-  );
+    stars =
+        Array.from(
+            {length:150},
+            () => ({
+                x:Math.random()*width,
+                y:Math.random()*height,
+                r:Math.random()*1.4+.2,
+                speed:Math.random()*.35+.05
+            })
+        );
 }
 
 resize();
 
-addEventListener(
-  "resize",
-  resize
+window.addEventListener(
+    "resize",
+    resize
 );
 
-function draw(){
+function drawStars(){
 
-  ctx.clearRect(
-    0,
-    0,
-    width,
-    height
-  );
-
-  for(
-    const star of stars
-  ){
-
-    star.y += star.s;
-
-    if(
-      star.y > height
-    ){
-      star.y=0;
-    }
-
-    ctx.globalAlpha =
-      .25 + Math.random()*.6;
-
-    ctx.fillStyle="#fff";
-
-    ctx.beginPath();
-
-    ctx.arc(
-      star.x,
-      star.y,
-      star.r,
-      0,
-      7
+    ctx.clearRect(
+        0,
+        0,
+        width,
+        height
     );
 
-    ctx.fill();
-  }
+    stars.forEach(star => {
 
-  requestAnimationFrame(draw);
+        star.y += star.speed;
+
+        if(star.y > height)
+            star.y = 0;
+
+        ctx.globalAlpha =
+            .2 + Math.random()*.6;
+
+        ctx.fillStyle="#fff";
+
+        ctx.beginPath();
+
+        ctx.arc(
+            star.x,
+            star.y,
+            star.r,
+            0,
+            Math.PI*2
+        );
+
+        ctx.fill();
+
+    });
+
+    requestAnimationFrame(drawStars);
 }
 
-draw();
+drawStars();
 
 
-/* =========================
+/* ==========================
    3D CARD EFFECT
-========================= */
+========================== */
 
 const card =
 document.getElementById("card");
 
-addEventListener(
-  "pointermove",
-  event => {
+document.addEventListener(
+    "pointermove",
+    event => {
 
-    const rect =
-      card.getBoundingClientRect();
+        const rect =
+            card.getBoundingClientRect();
 
-    const px =
-      (event.clientX-rect.left) /
-      rect.width - .5;
+        const x =
+            (event.clientX-rect.left)
+            /rect.width-.5;
 
-    const py =
-      (event.clientY-rect.top) /
-      rect.height - .5;
+        const y =
+            (event.clientY-rect.top)
+            /rect.height-.5;
 
-    card.style.transform =
-      `perspective(900px)
-       rotateY(${px*7}deg)
-       rotateX(${-py*7}deg)
-       translateY(-4px)`;
-  }
+        card.style.transform =
+            `perspective(1000px)
+             rotateY(${x*7}deg)
+             rotateX(${-y*7}deg)
+             translateY(-5px)`;
+    }
 );
 
-addEventListener(
-  "pointerleave",
-  () => {
+document.addEventListener(
+    "pointerleave",
+    () => {
 
-    card.style.transform="";
-  }
+        card.style.transform="";
+    }
 );
 
 
-/* =========================
+/* ==========================
    BIRTHDAY SURPRISE
-========================= */
+========================== */
 
 document
 .getElementById("btn")
-.onclick=()=>{
+.addEventListener(
+    "click",
+    () => {
 
-  document
-  .getElementById("secret")
-  .classList.add("open");
+        document
+        .getElementById("secret")
+        .classList.add("open");
 
-  for(
-    let i=0;
-    i<30;
-    i++
-  ){
+        const emojis =
+            [
+                "💖",
+                "✨",
+                "🌸",
+                "💫",
+                "♡"
+            ];
 
-    setTimeout(
+        for(
+            let i=0;
+            i<35;
+            i++
+        ){
 
-      () => {
+            setTimeout(
+                () => {
 
-        const heart =
-          document.createElement("div");
+                    const particle =
+                        document.createElement("div");
 
-        heart.className="heart";
+                    particle.className="heart";
 
-        heart.textContent =
-          [
-            "💖",
-            "✨",
-            "🌸",
-            "💫"
-          ][
-            Math.floor(
-              Math.random()*4
-            )
-          ];
+                    particle.textContent =
+                        emojis[
+                            Math.floor(
+                                Math.random()*
+                                emojis.length
+                            )
+                        ];
 
-        heart.style.left =
-          Math.random()*100+"vw";
+                    particle.style.left =
+                        Math.random()*100+"vw";
 
-        heart.style.bottom =
-          "10vh";
+                    particle.style.bottom =
+                        "8vh";
 
-        heart.style.animationDuration =
-          (2+Math.random()*2)+"s";
+                    particle.style.animationDuration =
+                        (2.5+
+                        Math.random()*2)+"s";
 
-        document.body
-        .appendChild(heart);
+                    document.body
+                    .appendChild(particle);
 
-        setTimeout(
-          () => heart.remove(),
-          4000
-        );
+                    setTimeout(
+                        () => particle.remove(),
+                        4500
+                    );
 
-      },
-
-      i*70
-
-    );
-  }
-};
+                },
+                i*60
+            );
+        }
+    }
+);
 
 </script>
 
 </body>
 </html>
+```
